@@ -154,7 +154,12 @@ function activateInvulnerability() {
 }
 
 function pauseGame() {
-    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    // 1. Siempre cancelamos el frame de animación pendiente si existe.
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null; // Reiniciamos el ID para forzar un nuevo inicio.
+    }
+    
     isRunning = false;
     stopScoreCounter();
     clearInterval(spawnInterval); 
@@ -178,7 +183,11 @@ function resumeGame() {
         startPowerUpSpawn(); 
         updateMessage('Juego Reanudado. ¡Mucha suerte!');
 
-        if (!animationFrameId) gameLoop();
+        // 2. Si animationFrameId es nulo (porque fue cancelado en pauseGame), lo iniciamos de nuevo.
+        if (!animationFrameId) {
+             gameLoop();
+        }
+        // Nota: gameLoop asignará el nuevo ID a animationFrameId
     }
 }
 
@@ -356,5 +365,6 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.getElementById('apply-config').addEventListener('click', applySettingsAndRestart);
+
 
 applySettingsAndRestart();
