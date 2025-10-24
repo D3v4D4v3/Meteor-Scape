@@ -183,11 +183,10 @@ function resumeGame() {
         startPowerUpSpawn(); 
         updateMessage('Juego Reanudado. ¡Mucha suerte!');
 
-        // 2. Si animationFrameId es nulo (porque fue cancelado en pauseGame), lo iniciamos de nuevo.
         if (!animationFrameId) {
              gameLoop();
         }
-        // Nota: gameLoop asignará el nuevo ID a animationFrameId
+
     }
 }
 
@@ -216,15 +215,20 @@ function resetGame() {
 }
 
 function applySettingsAndRestart() {
-    pauseGame(); 
+
+    if (isRunning) pauseGame(); 
 
     gameSettings.numEnemies = Math.min(5, Math.max(0, parseInt(document.getElementById('num-enemies').value)));
     gameSettings.speedFactor = Math.min(3, Math.max(1, parseInt(document.getElementById('speed-factor').value)));
     gameSettings.startLife = Math.min(5, Math.max(1, parseInt(document.getElementById('start-life').value)));
 
+
     resetGame();
-    updateMessage('Configuración aplicada. Presiona ENTER para jugar.');
+    
+
+    resumeGame();
 }
+
 
 
 function updatePosition() {
@@ -368,3 +372,4 @@ document.getElementById('apply-config').addEventListener('click', applySettingsA
 
 
 applySettingsAndRestart();
+
