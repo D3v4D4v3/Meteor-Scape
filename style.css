@@ -1,0 +1,220 @@
+/* ==================================== */
+/* 1. Estilos Globales y Layout */
+/* ==================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0d1a26;
+    color: #ecf0f1;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 10px; 
+    text-align: center;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #3498db;
+    margin: 0;
+    font-size: 2em;
+}
+
+/* ==================================== */
+/* 2. Paneles de Información (Stats) */
+/* ==================================== */
+#stats-container {
+    display: flex;
+    gap: 20px;
+}
+
+#life-panel, #score-panel {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ecf0f1;
+    background-color: #2c3e50;
+    padding: 5px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+#life-display {
+    color: #e74c3c;
+}
+
+#message-log {
+    width: 980px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #2c3e50;
+    color: #2ecc71; 
+    border: 1px solid #34495e;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+#config-toggle {
+    padding: 10px 15px;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+#config-toggle:hover {
+    background-color: #34495e;
+}
+
+/* ==================================== */
+/* 3. Área de Juego y Personajes */
+/* ==================================== */
+#game-area {
+    width: 1000px;
+    height: 700px;
+    background-color: #0f2133; 
+    position: relative;
+    border: 5px solid #3498db; 
+    overflow: hidden;
+    cursor: none; 
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+}
+
+.character {
+    position: absolute;
+    transition: transform 0.05s linear, opacity 0.1s ease-in-out; 
+}
+
+#player {
+    width: 30px; 
+    height: 30px;
+    background-color: #2ecc71;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #2ecc71;
+    z-index: 5; 
+}
+
+.flashing { 
+    opacity: 0.3;
+}
+
+.meteor { 
+    border-radius: 50%;
+    z-index: 4;
+}
+
+.meteor.large { 
+    width: 40px;
+    height: 40px;
+    background-color: #e74c3c;
+    box-shadow: 0 0 10px #e74c3c;
+}
+
+.meteor.small { 
+    width: 25px;
+    height: 25px;
+    background-color: #f39c12;
+    box-shadow: 0 0 8px #f39c12;
+}
+
+/* Power-Up: Triangulito Verde (Health) */
+.power-up {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    /* Usamos un borde para simular un triángulo */
+    background-color: transparent;
+    border-radius: 0;
+    z-index: 6;
+    animation: pulse 1s infinite alternate; 
+}
+
+.health-powerup {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent; 
+    border-right: 15px solid transparent; 
+    border-bottom: 30px solid #2ecc71; /* Triángulo verde */
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.8);
+    line-height: 0; /* Asegura que el texto no interfiera */
+    font-size: 0;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+/* ==================================== */
+/* 4. Panel de Configuración */
+/* ==================================== */
+#config-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100; 
+    border: 2px solid #3498db;
+    padding: 25px;
+    background-color: #2c3e50;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    width: 350px;
+    text-align: center;
+}
+
+#config-panel h2 {
+    color: #e67e22;
+    margin-top: 0;
+}
+
+#config-panel label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #95a5a6;
+    text-align: left;
+}
+
+#config-panel input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    background-color: #34495e;
+    color: #fff;
+    font-size: 1em;
+}
+
+#config-panel button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #e67e22; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.2s;
+}
+
+#config-panel button:hover {
+    background-color: #d35400;
+}
+
+.hidden {
+    display: none;
+}
